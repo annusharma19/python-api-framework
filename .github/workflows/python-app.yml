@@ -34,7 +34,7 @@ jobs:
 
     - name: Upload test reports
       if: always()  # Upload test reports even if the tests fail
-      uses: actions/upload-artifact@v2
+      uses: actions/upload-artifact@v3  # Updated to the latest version
       with:
         name: test-reports
         path: reports/  # Path where your reports are stored
