@@ -30,15 +30,12 @@ jobs:
     - name: Run tests
       run: |
         . .venv/bin/activate
-        pytest --maxfail=1 --disable-warnings -v  # Run tests in verbose mode
+        pytest --maxfail=1 --disable-warnings -v --log-file=logs/test_log.log  # Run tests and output logs to a file
 
     - name: Convert log to HTML
       run: |
-        python convert_log_to_html.py logs/test_log.log logs/test_log.html  # Adjust path as needed
+        python utils/html_report.py logs/test_log.log logs/test_log.html  # Convert the log file to HTML using html_report.py
 
     - name: Upload log files as artifacts
       if: always()  # Upload logs even if tests fail
-      uses: actions/upload-artifact@v4  # Updated to the latest version (v4)
-      with:
-        name: test-logs
-        path: logs/test_log.html  # Path to your HTML log file
+      uses: actions/upload-artifact@v4  # Updated to the latest versio
