@@ -48,7 +48,9 @@ def delete_booking(booking_id, token):
     headers = {
         "Authorization": f"Bearer {token}"
     }
-    response = requests.delete(url, headers=headers)
+    print(headers)
+    response = requests.delete(url)
+
     return response
 
 

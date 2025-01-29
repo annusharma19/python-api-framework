@@ -48,7 +48,7 @@ def test_delete_booking(setup_bookings):
     Test case to delete one booking and log the return status.
     """
     token = get_auth_token()  # Fetch auth token
-
+    #logger.info(f"available bookings ID {setup_bookings} going to delete with status code {setup_bookings[0]}")
     booking_id_to_delete = setup_bookings[0]
     response = delete_booking(booking_id_to_delete, token)
-    logger.info(f"Booking ID {booking_id_to_delete} deleted with status code {response.status_code}")
+    logger.info(f"Booking ID {booking_id_to_delete} deleted")
