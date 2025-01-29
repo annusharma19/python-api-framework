@@ -38,4 +38,11 @@ jobs:
 
     - name: Upload log files as artifacts
       if: always()  # Upload logs even if tests fail
-      uses: actions/upload-artifact@v4  # Updated to the latest versio
+      uses: actions/upload-artifact@v4
+      with:
+        name: artifact
+        path: logs/test_log.html  # Correct path to the HTML log file
+        if-no-files-found: warn
+        compression-level: 6
+        overwrite: false
+        include-hidden-files: false
