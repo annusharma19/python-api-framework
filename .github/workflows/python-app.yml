@@ -32,9 +32,13 @@ jobs:
         . .venv/bin/activate
         pytest --maxfail=1 --disable-warnings -v  # Run tests in verbose mode
 
-    - name: Upload test reports
-      if: always()  # Upload test reports even if the tests fail
-      uses: actions/upload-artifact@v3  # Updated to the latest version
+    - name: Convert log to HTML
+      run: |
+        python convert_log_to_html.py logs/test_log.log logs/test_log.html  # Adjust path as needed
+
+    - name: Upload log files as artifacts
+      if: always()  # Upload logs even if tests fail
+      uses: actions/upload-artifact@v3
       with:
-        name: test-reports
-        path: reports/  # Path where your reports are stored
+        name: test-logs
+        path: logs/test_log.html  # Path to your HTML log file
