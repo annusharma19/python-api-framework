@@ -40,4 +40,9 @@ cd python-api-framework
 - Logs actions: booking IDs, creation, modification, and deletion.
 - Logs are stored in `logs/` directory.
 
+## Github Actions
+- python-app.yml file has the required configuration to run github actions on pull/push request.
+- artifacts are created post PR "test_log.html" 
+
+
 
