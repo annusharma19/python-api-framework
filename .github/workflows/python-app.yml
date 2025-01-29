@@ -1,0 +1,40 @@
+name: Python API Automation Tests
+
+on:
+  push:
+    branches:
+      - main  # Run on pushes to the main branch
+  pull_request:
+    branches:
+      - main  # Run on pull requests targeting the main branch
+
+jobs:
+  test:
+    runs-on: ubuntu-latest  # Specify the operating system (Ubuntu in this case)
+
+    steps:
+    - name: Checkout code
+      uses: actions/checkout@v2
+
+    - name: Set up Python
+      uses: actions/setup-python@v2
+      with:
+        python-version: 3.11  # Specify the Python version
+
+    - name: Install dependencies
+      run: |
+        python -m venv .venv
+        . .venv/bin/activate
+        pip install -r requirements.txt  # Install the dependencies
+
+    - name: Run tests
+      run: |
+        . .venv/bin/activate
+        pytest --maxfail=1 --disable-warnings -v  # Run tests in verbose mode
+
+    - name: Upload test reports
+      if: always()  # Upload test reports even if the tests fail
+      uses: actions/upload-artifact@v2
+      with:
+        name: test-reports
+        path: reports/  # Path where your reports are stored
